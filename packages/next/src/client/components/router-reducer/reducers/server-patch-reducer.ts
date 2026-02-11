@@ -24,7 +24,7 @@ export function serverPatchReducer(
   const retryUrl = new URL(action.url, location.origin)
   const retrySeed = action.seed
   // A retry should not create a new history entry.
-  const navigateType = 'replace'
+  const navigateType = state.pushRef.pendingPush ? 'push' : 'replace'
   if (retryMpa || retrySeed === null) {
     // If the server did not send back data during the mismatch, fall back to
     // an MPA navigation.
